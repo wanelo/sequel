@@ -18,4 +18,6 @@ SEQUEL_GEMSPEC = Gem::Specification.new do |s|
   s.require_path = "lib"
   s.bindir = 'bin'
   s.executables << 'sequel'
+
+  s.add_dependency 'ruby-usdt'
 end

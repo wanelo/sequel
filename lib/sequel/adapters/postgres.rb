@@ -203,6 +203,9 @@ module Sequel
       # driver is used.
       def connect(server)
         opts = server_opts(server)
+        if Sequel::DTrace.provider.postgres__connect.enabled?
+          Sequel::DTrace.provider.postgres__connect.fire(opts[:database].to_s)
+        end
         conn = if SEQUEL_POSTGRES_USES_PG
           connection_params = {
             :host => opts[:host],

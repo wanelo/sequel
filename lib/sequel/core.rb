@@ -1,4 +1,5 @@
 %w'bigdecimal date thread time uri'.each{|f| require f}
+require 'sequel/dtrace'
 
 # Top level module for Sequel
 #
