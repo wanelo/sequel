@@ -13,7 +13,19 @@ describe Sequel::DTrace do
 
     describe 'postgres__connect' do
       it 'is a probe' do
-        expect(provider.postgres__connect).to be_a(USDT::Probe)
+        provider.postgres__connect.should be_a(USDT::Probe)
+      end
+
+      it 'has :postgres function' do
+        provider.postgres__connect.function.should == :postgres
+      end
+
+      it 'has :connect name' do
+        provider.postgres__connect.name.should == :connect
+      end
+
+      it 'takes a string argument' do
+        provider.postgres__connect.arguments.should == [:string]
       end
     end
   end
