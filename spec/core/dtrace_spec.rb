@@ -28,6 +28,24 @@ describe Sequel::DTrace do
         provider.postgres__connect.arguments.should == [:string]
       end
     end
+
+    describe 'model__get_db_schema' do
+      it 'is a probe' do
+        provider.model__get_db_schema.should be_a(USDT::Probe)
+      end
+
+      it 'has :model function' do
+        provider.model__get_db_schema.function.should == :model
+      end
+
+      it 'has :get_db_schema name' do
+        provider.model__get_db_schema.name.should == :get_db_schema
+      end
+
+      it 'takes string arguments' do
+        provider.model__get_db_schema.arguments.should == [:string, :string]
+      end
+    end
   end
 
   describe '::provider' do

@@ -703,6 +703,9 @@ module Sequel
       # via the database if that will return inaccurate results or if
       # it raises an error.
       def get_db_schema(reload = false)
+        if Sequel::DTrace.provider.model__get_db_schema.enabled?
+          Sequel::DTrace.provider.model__get_db_schema.fire(name, reload.to_s)
+        end
         set_columns(nil)
         return nil unless @dataset
         schema_hash = {}

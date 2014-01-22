@@ -6,6 +6,7 @@ module Sequel
       def provider
         @provider ||= Provider.new.tap do |p|
           p.postgres__connect
+          p.model__get_db_schema
           p.provider.enable
         end
       end
@@ -20,6 +21,10 @@ module Sequel
 
       def postgres__connect
         @postgres__connect ||= provider.probe(:postgres, :connect, :string)
+      end
+
+      def model__get_db_schema
+        @model__get_db_schema ||= provider.probe(:model, :get_db_schema, :string, :string)
       end
     end
   end
